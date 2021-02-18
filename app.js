@@ -72,4 +72,4 @@ const stockLive = setInterval(function() {
   percentSet();
   consoleSet();
   pageView();
-// }, 1000);
+}, 1000);
