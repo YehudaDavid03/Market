@@ -1,89 +1,96 @@
-// const viewResult = document.querySelector(".main-first-div-one-h1");
+const viewResult = document.querySelector(".main-first-div-one-h1");
 
-// let stockBuyPower = 9;
-// let stockPrice = 1.693;
-// let stockName = "Apple";
+let stockBuyPower = 9;
+let stockPrice = .50;
+let stockName = "DGS";
 
-// let stockShares = 100;
-// let marketCap = 100 - stockShares;
+let stockShares = 100;
+let marketCap = 100 - stockShares;
 
-// let allPastPrices = [];
-// let percentOfChange = 0;
-// let percentChangeLast = 0;
+let allPastPrices = [];
+let percentOfChange = 0;
+let percentChangeLast = 0;
 
-// const botSet = function() {
-//   randomQty = Math.floor(Math.random() * stockBuyPower + 1);
-//   randomBool = [true, false];
-//   randomBool = randomBool[Math.floor(Math.random() * randomBool.length)];
-// };
+const botSet = function() {
+  randomQty = Math.floor(Math.random() * stockBuyPower + 1);
+  randomBool = [true, false];
+  randomBool = randomBool[Math.floor(Math.random() * randomBool.length)];
+};
 
 
-// const stockSet = function() {
-//   if (randomBool === true) {
-//     stockShares -=  randomQty;
-//     stockPrice += randomQty / stockShares;
-//     marketCap = 100 - stockShares;
-//   } else if (randomBool === false && marketCap > randomQty) {
-//     stockShares += randomQty;
-//     stockPrice -= randomQty / stockShares;
-//     marketCap = 100 + stockShares;
-//   } else {
+const stockSet = function() {
+  if (randomBool === true) {
+    stockShares -=  randomQty;
+    stockPrice += randomQty / stockShares;
+    marketCap = 100 - stockShares;
+  } else if (randomBool === false && marketCap > randomQty) {
+    stockShares += randomQty;
+    stockPrice -= randomQty / stockShares;
+    marketCap = 100 + stockShares;
+  } else {
 
-//   }
-// };
+  }
+};
 
-// const percentSet = function() {
-//   pastPricesIndex = allPastPrices.length - 1;
-//   pastPriceResult = allPastPrices[pastPricesIndex];
+const percentSet = function() {
+  pastPricesIndex = allPastPrices.length - 1;
+  pastPriceResult = allPastPrices[pastPricesIndex];
 
-//   percentOfChange = (stockPrice - allPastPrices[0]) / allPastPrices[0] * 100;
-//   percentChangeLast = (stockPrice - pastPriceResult) / pastPriceResult * 100;
-//   allPastPrices.push(stockPrice);
-// };
+  percentOfChange = (stockPrice - allPastPrices[0]) / allPastPrices[0] * 100;
+  percentChangeLast = (stockPrice - pastPriceResult) / pastPriceResult * 100;
+  allPastPrices.push(stockPrice);
+};
 
-// const candleSet = function() {
+const candleSet = function() {
+  let candleHeight = 5 + percentOfChange + "%";
 
-// };
+  let redCandle = document.createElement("div");
+  redCandle.style.backgroundColor = "red";
+  redCandle.style.height = candleHeight;
+  redCandle.style.marginLeft = "1%";
+  redCandle.style.width = "1.75%";
 
-// const consoleSet = function() {
-//   console.log("Stock Name: " + stockName);
-//   console.log("Amount " + (randomBool === true ? "Bought: " : "Sold: ") + randomQty);
-//   // console.log("Stock Price: " + stockPrice);
-//   // console.log("Stock Shares: " + stockShares);
-//   // console.log("Market Cap: " + marketCap);
-//   console.log("Percent Change: %" + percentOfChange);
-//   console.log("Percent Change Last: %" + percentChangeLast);
-//   console.log("--------------------")
-// };
+  let greenCandle = document.createElement("div");
+  greenCandle.style.backgroundColor = "green";
+  greenCandle.style.height = candleHeight;
+  greenCandle.style.marginLeft = "1%";
+  greenCandle.style.width = "1.75%";
 
-// const pageView = function() {
-//   if (randomBool === true) {
-//     viewResult.style.color = "green";
-//   } else if (randomBool === false) {
-//     viewResult.style.color = "red";
-//   }
+  let candle = null;
 
-//   viewResult.textContent = stockName + ": $" + stockPrice.toFixed(3) + ", (%" + percentOfChange.toFixed(3) + ")" + ", (%" + percentChangeLast.toFixed(3) + ")" + "";
-// };
+  if (randomBool === true) {
+    candle = greenCandle;
+    console.log(candleHeight);
+  } else {
+    candle = redCandle;
+    console.log(candleHeight);
+  }
+  document.getElementById("main-first-div-two").appendChild(candle);
+};
 
-// const stockLive = setInterval(function() {
-//   botSet();
-//   stockSet();
-//   percentSet();
-//   consoleSet();
-//   pageView();
-// }, 1000000);
+const consoleSet = function() {
+  console.log("Stock Name: " + stockName);
+  console.log("Amount " + (randomBool === true ? "Bought: " : "Sold: ") + randomQty);
+  console.log("Percent Change: %" + percentOfChange);
+  console.log("Percent Change Last: %" + percentChangeLast);
+  console.log("--------------------")
+};
 
-// let array = [30, 40, 30, 200, 200];
-// let ratio = 2;
-// for (let i = 0; i < 5; i++) {
-//   if (array[i] >= 100) {
-//     ratio = ratio * 2;
-//     console.log("True: " + array[i]);
-//   } else {
-//     ratio = 2;
-//     console.log("False");
-//   }
-// };
+const pageView = function() {
+  if (randomBool === true) {
+    viewResult.style.color = "green";
+  } else if (randomBool === false) {
+    viewResult.style.color = "red";
+  }
 
-// console.log(ratio);
+  viewResult.textContent = stockName + ": $" + stockPrice.toFixed(3) + ", (%" + percentOfChange.toFixed(3) + ")" + ", (%" + percentChangeLast.toFixed(3) + ")" + "";
+};
+
+const stockLive = setInterval(function() {
+  botSet();
+  stockSet();
+  percentSet();
+  candleSet();
+  consoleSet();
+  pageView();
+}, 1000);
