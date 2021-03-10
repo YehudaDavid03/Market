@@ -13,7 +13,7 @@ let percentChangeLast = 0;
 
 const botSet = function() {
   randomQty = Math.floor(Math.random() * stockBuyPower + 1);
-  randomBool = [true, false];
+  randomBool = [true, false, false];
   randomBool = randomBool[Math.floor(Math.random() * randomBool.length)];
 };
 
@@ -65,8 +65,16 @@ const candleSet = function() {
     candle = redCandle;
     console.log(candleHeight);
   }
-  document.getElementById("main-first-div-two").appendChild(candle);
-};
+
+  let v = document.getElementById("main-first-div-two");
+
+  if (v.childNodes.length > 20) {
+    document.getElementById("main-first-div-two").appendChild(candle);
+    v.removeChild(v.childNodes[0]);
+  } else {
+    document.getElementById("main-first-div-two").appendChild(candle);
+  }
+}
 
 const consoleSet = function() {
   console.log("Stock Name: " + stockName);
